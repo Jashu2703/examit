@@ -1,0 +1,30 @@
+# Environment files - NEVER commit these (root, backend, frontend)
+.env
+*.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+*.db
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
