@@ -2,7 +2,7 @@
 
 > AI-powered mock test platform for all major Indian competitive exams. Questions generated in real-time by LLM — never the same test twice.
 
-🔗 **Live:** [examit.vercel.app](https://examit.vercel.app)  
+🔗 **Live:** [examit.vercel.app](https://examit-delta.vercel.app/)  
 📡 **API:** [examit-api.onrender.com/docs](https://examit-api.onrender.com/docs)
 
 ---
