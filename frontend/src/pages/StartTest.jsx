@@ -21,11 +21,24 @@ export default function StartTest() {
   });
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
     listExams().then(r => setExams(r.data));
   }, []);
+
+  useEffect(() => {
+    if (!generating) { setLoadingMsg(''); return; }
+    setLoadingMsg('✨ AI is generating your personalised test...');
+    const stages = [
+      { at: 8000,  msg: '🧠 Still thinking — larger or harder tests take a bit longer...' },
+      { at: 20000, msg: '⏳ Almost there — complex questions take extra time to generate...' },
+      { at: 40000, msg: '🐢 This one is taking a while. Free-tier AI can be slow under load, hang tight...' },
+    ];
+    const timers = stages.map(s => setTimeout(() => setLoadingMsg(s.msg), s.at));
+    return () => timers.forEach(clearTimeout);
+  }, [generating]);
 
   useEffect(() => {
     if (!form.exam_type) return;
@@ -76,7 +89,7 @@ export default function StartTest() {
       {error && <div className="alert alert-error">{error}</div>}
       {generating && (
         <div className="alert alert-info" style={{ textAlign: 'center' }}>
-          ✨ AI is generating your personalised test... This takes 5–10 seconds
+          {loadingMsg}
         </div>
       )}
 
@@ -155,12 +168,12 @@ export default function StartTest() {
               <>
                 <div className="form-group">
                   <label className="form-label">Number of Questions: <strong>{form.num_questions}</strong></label>
-                  <input type="range" min={5} max={50} step={5}
+                  <input type="range" min={5} max={30} step={5}
                     value={form.num_questions}
                     onChange={set('num_questions')}
                     style={{ width: '100%', accentColor: 'var(--accent)' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--text3)' }}>
-                    <span>5</span><span>50</span>
+                    <span>5</span><span>30</span>
                   </div>
                 </div>
                 <div className="form-group">

@@ -33,7 +33,7 @@ async def start_test(
             raise HTTPException(status_code=400, detail="Invalid chapter for this subject")
 
     # Cap questions to reasonable limits
-    num_q = min(max(payload.num_questions, 5), 50)
+    num_q = min(max(payload.num_questions, 5), 30)
 
     # Generate questions via AI
     try:
